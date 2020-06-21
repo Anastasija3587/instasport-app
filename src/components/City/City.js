@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from './City.module.css';
 
 const City = ({ clubs, filteredClubs, setfilteredClubs, chooseSport }) => {
   const [inputCity, setInputCity] = useState('');
@@ -15,9 +16,10 @@ const City = ({ clubs, filteredClubs, setfilteredClubs, chooseSport }) => {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <>
+      <form className={styled.wrap} onSubmit={handleSubmit}>
         <select
+          className={styled.select}
           value={inputCity}
           onChange={event => setInputCity(event.target.value)}
         >
@@ -26,9 +28,11 @@ const City = ({ clubs, filteredClubs, setfilteredClubs, chooseSport }) => {
             <option key={city}>{city}</option>
           ))}
         </select>
-        <button type="submit">!!!</button>
+        <button className={styled.btn} type="submit">
+          &#10004;
+        </button>
       </form>
-    </div>
+    </>
   );
 };
 

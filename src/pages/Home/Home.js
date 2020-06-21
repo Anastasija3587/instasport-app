@@ -1,10 +1,13 @@
 import React from 'react';
+import styled from './Home.module.css';
 
 const Home = () => {
   return (
-    <div>
+    <div className={styled.wrap}>
       <h1>Рады видеть Вас на нашем сайте!</h1>
-      <p>Для записи на тренировку теперь достаточно пару касаний!</p>
+      <p className={styled.text}>
+        Для записи на тренировку теперь достаточно пару касаний!
+      </p>
     </div>
   );
 };

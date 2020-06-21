@@ -1,0 +1,10 @@
+.wrap {
+  text-align: center;
+  padding-top: 10%;
+}
+
+@media (min-width: 1280px) {
+  .text {
+    font-size: 20px;
+  }
+}

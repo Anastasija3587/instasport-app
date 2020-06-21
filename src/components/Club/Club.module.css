@@ -1,0 +1,22 @@
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+.item {
+  margin: 0 3px 10px 0;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .logo {
+    width: 200px;
+    height: 200px;
+  }
+}

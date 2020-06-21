@@ -1,0 +1,26 @@
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-left: 2%;
+}
+
+.btn {
+  margin: 0 2% 2% 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: rgba(161, 199, 49, 0.616);
+}
+
+@media (min-width: 1280px) {
+  .wrap {
+    width: 80%;
+    margin: auto;
+    font-size: 20px;
+  }
+
+  .btn {
+    padding: 8px;
+  }
+}

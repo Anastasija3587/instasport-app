@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-no-target-blank */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from './Club.module.css';
 
 const Club = ({ club }) => {
   return (
-    <li>
-      <a href={club.link} target="_blank">
-        <img src={club.logo} alt="logo" width="100" height="100" />
+    <li className={styled.item}>
+      <a className={styled.link} href={club.link} target="_blank">
+        <img className={styled.logo} src={club.logo} alt="logo" />
         <p>{club.city.slug}</p>
       </a>
     </li>
