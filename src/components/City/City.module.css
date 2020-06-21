@@ -23,9 +23,27 @@
   composes: general;
 }
 
+.reset {
+  margin: 0 2% 2% 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: rgb(141, 177, 35);
+  margin-left: 2%;
+}
+
+.span {
+  color: rgb(255, 0, 0);
+}
+
 @media (min-width: 768px) {
   .wrap {
     padding-left: 4%;
+    margin-bottom: 5%;
+  }
+
+  .reset {
+    margin-left: 4%;
   }
 }
 
@@ -44,5 +62,9 @@
   .btn {
     width: 50px;
     height: 36px;
+  }
+
+  .reset {
+    padding: 8px;
   }
 }

@@ -1,20 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Notyf } from 'notyf';
 import styled from './City.module.css';
+import 'notyf/notyf.min.css';
 
-const City = ({ clubs, filteredClubs, setfilteredClubs, chooseSport }) => {
-  const [inputCity, setInputCity] = useState('');
+const notyf = new Notyf();
 
+const City = ({
+  clubs,
+  filteredClubs,
+  setfilteredClubs,
+  chooseSport,
+  setChooseSport,
+  inputCity,
+  setInputCity,
+}) => {
   const handleSubmit = event => {
     event.preventDefault();
     if (chooseSport) {
-      setfilteredClubs(
-        filteredClubs.filter(club => club.city.title === inputCity),
+      const arrFilteredClubs = filteredClubs.filter(
+        club => club.city.title === inputCity,
       );
+      if (arrFilteredClubs.length > 0) {
+        setfilteredClubs(arrFilteredClubs);
+      } else {
+        notyf.error('Ничего не найдено!');
+        setInputCity('');
+      }
     } else {
       setfilteredClubs(clubs.filter(club => club.city.title === inputCity));
     }
   };
+
+  const resetCity = () => {
+    setInputCity('');
+    if (chooseSport) {
+      setfilteredClubs(
+        clubs.filter(club =>
+          club.activity.map(el => el.slug).includes(chooseSport),
+        ),
+      );
+    } else {
+      setfilteredClubs([]);
+    }
+  };
+
+  const resetSport = () => {
+    setChooseSport('');
+    if (inputCity) {
+      setfilteredClubs(clubs.filter(club => club.city.title === inputCity));
+    } else {
+      setfilteredClubs([]);
+    }
+  };
+
   return (
     <>
       <form className={styled.wrap} onSubmit={handleSubmit}>
@@ -29,9 +68,19 @@ const City = ({ clubs, filteredClubs, setfilteredClubs, chooseSport }) => {
           ))}
         </select>
         <button className={styled.btn} type="submit">
-          &#10004;
+          ok
         </button>
       </form>
+      {inputCity && (
+        <button className={styled.reset} onClick={resetCity} type="button">
+          {inputCity} <span className={styled.span}>&#10006;</span>
+        </button>
+      )}
+      {chooseSport && (
+        <button className={styled.reset} onClick={resetSport} type="button">
+          {chooseSport} <span className={styled.span}>&#10006;</span>
+        </button>
+      )}
     </>
   );
 };
@@ -40,7 +89,10 @@ City.propTypes = {
   clubs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   filteredClubs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setfilteredClubs: PropTypes.func.isRequired,
-  chooseSport: PropTypes.bool.isRequired,
+  chooseSport: PropTypes.string.isRequired,
+  setChooseSport: PropTypes.func.isRequired,
+  inputCity: PropTypes.string.isRequired,
+  setInputCity: PropTypes.func.isRequired,
 };
 
 export default City;

@@ -1,33 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Notyf } from 'notyf';
 import styled from './Sport.module.css';
+import 'notyf/notyf.min.css';
 
-const Sport = ({ setChooseSport, clubs, filteredClubs, setfilteredClubs }) => {
-  const fn = () => {
-    const sports = [];
-    if (filteredClubs.length > 0) {
-      filteredClubs
-        .map(club => club.activity)
-        .map(el => el.map(e => e.slug))
-        .forEach(el => sports.push(...el));
-    } else {
-      clubs
-        .map(club => club.activity)
-        .map(el => el.map(e => e.slug))
-        .forEach(el => sports.push(...el));
-    }
+const notyf = new Notyf();
 
-    return sports;
+const Sport = ({
+  setChooseSport,
+  clubs,
+  filteredClubs,
+  setfilteredClubs,
+  inputCity,
+  chooseSport,
+}) => {
+  const sports = () => {
+    const arrSports = [];
+    clubs
+      .map(club => club.activity)
+      .map(el => el.map(e => e.slug))
+      .forEach(el => arrSports.push(...el));
+
+    return Array.from(new Set(arrSports));
   };
 
   const handleClick = event => {
-    setChooseSport(true);
-    if (filteredClubs.length > 0) {
-      setfilteredClubs(
-        filteredClubs.filter(club =>
-          club.activity.map(el => el.slug).includes(event.target.value),
-        ),
+    if (chooseSport) return;
+    setChooseSport(event.target.value);
+    if (inputCity) {
+      const arrFilterClubs = filteredClubs.filter(club =>
+        club.activity.map(el => el.slug).includes(event.target.value),
       );
+      if (arrFilterClubs.length > 0) {
+        setfilteredClubs(arrFilterClubs);
+      } else {
+        notyf.error('Ничего не найдено!');
+        setChooseSport('');
+      }
     } else
       setfilteredClubs(
         clubs.filter(club =>
@@ -37,7 +46,7 @@ const Sport = ({ setChooseSport, clubs, filteredClubs, setfilteredClubs }) => {
   };
   return (
     <div className={styled.wrap}>
-      {Array.from(new Set(fn()))
+      {sports()
         .sort()
         .map(sport => (
           <button
@@ -59,6 +68,8 @@ Sport.propTypes = {
   filteredClubs: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   setfilteredClubs: PropTypes.func.isRequired,
   setChooseSport: PropTypes.func.isRequired,
+  inputCity: PropTypes.string.isRequired,
+  chooseSport: PropTypes.string.isRequired,
 };
 
 export default Sport;
