@@ -8,7 +8,7 @@ const Club = ({ club }) => {
     <li className={styled.item}>
       <a className={styled.link} href={club.link} target="_blank">
         <img className={styled.logo} src={club.logo} alt="logo" />
-        <p>{club.city.slug}</p>
+        <p className={styled.name}>{club.title_short}</p>
       </a>
     </li>
   );
@@ -18,7 +18,7 @@ Club.propTypes = {
   club: PropTypes.shape({
     link: PropTypes.string,
     logo: PropTypes.string,
-    city: PropTypes.shape(),
+    title_short: PropTypes.string,
   }).isRequired,
 };
 

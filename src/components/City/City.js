@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Notyf } from 'notyf';
 import styled from './City.module.css';
@@ -15,8 +15,11 @@ const City = ({
   inputCity,
   setInputCity,
 }) => {
+  const [showCity, setShowCity] = useState(false);
+
   const handleSubmit = event => {
     event.preventDefault();
+    setShowCity(true);
     if (chooseSport) {
       const arrFilteredClubs = filteredClubs.filter(
         club => club.city.title === inputCity,
@@ -34,6 +37,7 @@ const City = ({
 
   const resetCity = () => {
     setInputCity('');
+    setShowCity(false);
     if (chooseSport) {
       setfilteredClubs(
         clubs.filter(club =>
@@ -71,7 +75,7 @@ const City = ({
           ok
         </button>
       </form>
-      {inputCity && (
+      {showCity && (
         <button className={styled.reset} onClick={resetCity} type="button">
           {inputCity} <span className={styled.span}>&#10006;</span>
         </button>
