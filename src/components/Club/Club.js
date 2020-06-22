@@ -7,7 +7,7 @@ const Club = ({ club }) => {
   return (
     <li className={styled.item}>
       <a className={styled.link} href={club.link} target="_blank">
-        <img className={styled.logo} src={club.logo} alt="logo" />
+        <img className={styled.logo} src={club.logo} alt={club.title_short} />
         <p className={styled.name}>{club.title_short}</p>
       </a>
     </li>

@@ -13,6 +13,10 @@
   background-color: rgba(161, 199, 49, 0.616);
 }
 
+.btn:hover {
+  transform: scale(1.2);
+}
+
 @media (min-width: 1280px) {
   .wrap {
     width: 80%;

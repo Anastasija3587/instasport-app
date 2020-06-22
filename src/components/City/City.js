@@ -29,6 +29,7 @@ const City = ({
       } else {
         notyf.error('Ничего не найдено!');
         setInputCity('');
+        setShowCity(false);
       }
     } else {
       setfilteredClubs(clubs.filter(club => club.city.title === inputCity));

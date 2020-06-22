@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Notyf } from 'notyf';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styled from './Sport.module.css';
 import 'notyf/notyf.min.css';
+import pop from '../../transitions/pop.module.css';
 
 const notyf = new Notyf();
 
@@ -45,21 +47,28 @@ const Sport = ({
       );
   };
   return (
-    <div className={styled.wrap}>
+    <TransitionGroup component="div" className={styled.wrap}>
       {sports()
         .sort()
         .map(sport => (
-          <button
-            className={styled.btn}
-            onClick={handleClick}
-            value={sport}
+          <CSSTransition
             key={sport}
-            type="button"
+            unmountOnExit
+            classNames={pop}
+            timeout={250}
           >
-            {sport}
-          </button>
+            <button
+              className={styled.btn}
+              onClick={handleClick}
+              value={sport}
+              key={sport}
+              type="button"
+            >
+              {sport}
+            </button>
+          </CSSTransition>
         ))}
-    </div>
+    </TransitionGroup>
   );
 };
 
